@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Optimization -->
+  <title>Offline Media Compressor Pro - 100% Client-Side FFmpeg.wasm Transcoder</title>
+  <meta name="description" content="Compress video and audio files directly in your browser. 100% private with no server uploads. Powered by client-side WebAssembly FFmpeg.wasm.">
+  <meta name="keywords" content="compress video, reduce mp4 size, offline video compressor, browser video compress, ffmpeg.wasm, webassembly media transcoder">
+  
+  <!-- Premium Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Premium Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-file-video"></i>
+        Media Compressor Pro
+        <span class="badge">client-side</span>
+      </div>
+      <div class="header-nav">
+        <div class="privacy-indicator" id="privacy-indicator" title="Your media files never leave your device. Compression runs entirely inside your browser's local sandbox.">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>100% Private Offline Processing</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main>
+    
+    <!-- Left Column: Media Supply & Transcode Configuration -->
+    <section class="control-pane">
+      
+      <!-- 1. Supply Media Source Card -->
+      <div class="glass-card">
+        <h2 class="pane-title"><i class="fa-solid fa-photo-film"></i> 1. Supply Media Source</h2>
+        
+        <!-- Drag/Drop Zone -->
+        <div class="dropzone" id="dropzone">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <h3>Upload Video or Audio</h3>
+          <p>Drag and drop or click to browse</p>
+          <p class="file-limits">Supports MP4, WEBM, MKV, MP3, WAV (Max 40MB)</p>
+          <input type="file" id="file-input" class="file-input" accept="video/*,audio/*">
+        </div>
+
+        <!-- Image/Video specifications -->
+        <div class="file-details" id="file-details">
+          <div class="detail-row">
+            <span>Filename:</span>
+            <span class="detail-val" id="detail-filename">clip.mp4</span>
+          </div>
+          <div class="detail-row">
+            <span>File Size:</span>
+            <span class="detail-val" id="detail-size">0.0 MB</span>
+          </div>
+          <div class="detail-row" id="dims-row">
+            <span>Dimensions:</span>
+            <span class="detail-val" id="detail-dims">0 x 0</span>
+          </div>
+          <div class="detail-row">
+            <span>Duration:</span>
+            <span class="detail-val" id="detail-duration">0s</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Compression Presets Card -->
+      <div class="glass-card">
+        <h2 class="pane-title"><i class="fa-solid fa-circle-nodes"></i> 2. Select Compression Preset</h2>
+        
+        <div class="config-group">
+          <div class="preset-options">
+            
+            <div class="preset-card" data-preset="hq">
+              <div class="preset-info">
+                <span class="preset-name">High Quality Preset</span>
+                <span class="preset-desc">Slight file size shrink, fully preserved fidelity</span>
+              </div>
+              <span class="preset-val">CRF 22</span>
+            </div>
+            
+            <div class="preset-card active" data-preset="balanced">
+              <div class="preset-info">
+                <span class="preset-name">Balanced Preset</span>
+                <span class="preset-desc">Optimal blend of size savings & visual quality</span>
+              </div>
+              <span class="preset-val">CRF 27</span>
+            </div>
+            
+            <div class="preset-card" data-preset="max">
+              <div class="preset-info">
+                <span class="preset-name">Max Compression Preset</span>
+                <span class="preset-desc">Maximum file size reduction, reduced details</span>
+              </div>
+              <span class="preset-val">CRF 32</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. WebAssembly Progress Card (For FFmpeg WASM downloads and transcode frames) -->
+      <div class="glass-card progress-card" id="progress-card">
+        <div class="progress-header">
+          <span class="status-label" id="status-label"><i class="fa-solid fa-circle-notch fa-spin"></i> Initializing WebAssembly...</span>
+          <span class="status-percentage" id="status-percentage">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-details">
+          <span id="progress-speed">Downloading compiler binaries (~30MB)...</span>
+        </div>
+      </div>
+
+      <!-- 4. Action Trigger Button Card -->
+      <div class="glass-card" style="padding: 1.25rem;">
+        <button class="transcribe-btn" id="transcribe-btn" disabled>
+          <span class="spinner" id="btn-spinner"></span>
+          <i class="fa-solid fa-wand-magic-sparkles" id="btn-icon"></i>
+          <span id="btn-text">Load Media & Compress</span>
+        </button>
+      </div>
+
+      <!-- 5. Premium Sponsor Ad Demo (100% Net Profit Showcase) -->
+      <div class="ad-slot">
+        <div class="ad-badge">Sponsored</div>
+        <div class="ad-img">
+          <i class="fa-solid fa-file-video"></i>
+        </div>
+        <div class="ad-content">
+          <div class="ad-title">VideoCraft Cloud</div>
+          <div class="ad-desc">Host and embed your compressed video files using ultra-fast content delivery networks.</div>
+          <a href="#" class="ad-link" onclick="event.preventDefault(); alert('This is a highly tailored premium display ad demo. Because Media Compressor Pro runs 100% in-browser, you have $0/month server hosting costs—meaning ad spaces like these deliver pure, high-margin profit.');">Learn More &rarr;</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Column: Visual Comparison Workstation -->
+    <section class="editor-pane">
+      <div class="glass-card editor-card">
+        
+        <!-- Editor Header Panel -->
+        <div class="editor-toolbar">
+          <div class="toolbar-group">
+            <span style="font-weight: 600; font-size: 0.95rem;">Compression Studio</span>
+          </div>
+          <div class="toolbar-group">
+            <button class="toolbar-btn primary-btn" id="download-btn" disabled title="Download Compressed File">
+              <i class="fa-solid fa-download"></i> Download File
+            </button>
+            <button class="toolbar-btn" id="clear-editor-btn" disabled title="Remove current image">
+              <i class="fa-solid fa-trash-can"></i> Remove
+            </button>
+          </div>
+        </div>
+
+        <!-- Comparative Video/Audio Grid -->
+        <div class="editor-body">
+          
+          <!-- Large Loading Placeholder overlay Screen -->
+          <div class="placeholder-screen" id="placeholder-screen">
+            <i class="fa-solid fa-file-video"></i>
+            <h3>No Active Document</h3>
+            <p>Upload a video or audio file and click Compress to begin. The side-by-side comparative media players will render here in real-time.</p>
+          </div>
+
+          <!-- Dual Player comparison viewports -->
+          <div class="players-grid" id="players-grid">
+            
+            <!-- Left Player (Original) -->
+            <div class="player-panel">
+              <div class="player-header original-label">
+                <span>Original Media</span>
+                <span id="original-size-badge" style="font-family: var(--font-mono); font-size: 0.75rem;">0.0 MB</span>
+              </div>
+              <div class="player-wrapper" id="original-player-wrapper">
+                <!-- Loaded dynamically (Video or Audio) -->
+              </div>
+              <div class="player-meta" id="original-meta">Uncompressed</div>
+            </div>
+
+            <!-- Right Player (Compressed Output) -->
+            <div class="player-panel">
+              <div class="player-header compressed-label">
+                <span>Compressed Output</span>
+                <span id="compressed-size-badge" style="font-family: var(--font-mono); font-size: 0.75rem;">0.0 MB</span>
+              </div>
+              <div class="player-wrapper" id="compressed-player-wrapper">
+                <!-- Loaded dynamically (Video or Audio) -->
+              </div>
+              <div class="player-meta" id="compressed-meta">Processing Needed</div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Editor Footer Metadata -->
+        <div class="editor-footer">
+          <span id="editor-status">Offline Sandbox Enabled</span>
+          <span id="meta-savings" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--secondary); font-weight: 600; display: none;">Saved 0%</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
